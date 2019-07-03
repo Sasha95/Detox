@@ -1,0 +1,44 @@
+{
+  "name": "AwesomeProject",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "run-android": "react-native run-android",
+    "clean-android": "(cd android/ && gradlew clean)",
+    "build-release-apk": "(cd android/ && gradlew assembleRelease)",
+    "run-detox": "detox test -c android.emu.debug",
+    "buildDetoxTests": "cd android && gradlew assembleAndroidTest"
+  },
+  "dependencies": {
+    "apsl-react-native-button": "^3.1.1",
+    "mocha": "^6.0.2",
+    "react": "16.8.3",
+    "react-native": "0.59.10"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/runtime": "^7.4.5",
+    "babel-jest": "^24.8.0",
+    "detox": "^13.0.2",
+    "jest": "^24.8.0",
+    "metro-react-native-babel-preset": "^0.54.1",
+    "react-test-renderer": "16.8.3"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "detox": {
+    "configurations": {
+      "android.emu.debug": {
+        "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+        "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
+        "type": "android.emulator",
+        "name": "Pixel_2_API_28"
+      }
+    },
+    "test-runner": "jest",
+    "specs": ""
+  }
+}
